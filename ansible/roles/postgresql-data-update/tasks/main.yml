@@ -16,11 +16,11 @@
     - tables_postgres.sql
     - enc_postgres.sql
 
-- name: Install postgres client to create schema from file
-  apt:
-    name: postgresql-client
-    state: present
-    update_cache: yes
+#- name: Install postgres client to create schema from file
+#  apt:
+#    name: postgresql-client
+#    state: present
+#    update_cache: yes
 
 - name: Dump api manager database to a file
   postgresql_db:
