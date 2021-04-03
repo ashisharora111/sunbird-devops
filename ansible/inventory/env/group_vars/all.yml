@@ -39,7 +39,7 @@ sunbird_keycloak_required_action_link_expiration_seconds: 2592000
 
 sunbird_es_port: 9300
 mail_server_port: 587
-upstream_url: "{{sunbird_public_storage_account_name}}.blob.core.windows.net/{{sunbird_content_azure_storage_container}}"
+upstream_url: "https://sunbird-lab-bucket.s3.ap-south-1.amazonaws.com/container"
 
 ## Mailing list
 # !! Override for specific alert groups; Default will be alerts_mailing_list
