@@ -18,21 +18,21 @@
 - name: create xml configmap
   shell: find "{{role_path}}/templates/" -iname "*.xml" -exec /bin/bash -c "ls {}; kubectl create configmap {{ release_name }}-xml-config --from-file={} -n {{namespace}} --dry-run -o=yaml | kubectl apply -f - " \;
 
-- name: Load role to decrypt private keys, copy to helm chart and encrypt private keys
-  include_role:
-    name: mount-keys
-    tasks_from: "{{outer_item.1}}"
-  vars:
-    private_key_path: "{{ outer_item.0.values_to_pass.basepath }}"
-    private_key_prefix: "{{ outer_item.0.values_to_pass.keyprefix }}"
-    private_key_sign_start: "{{ outer_item.0.values_to_pass.keystart }}"
-    private_key_sign_end: "{{ outer_item.0.values_to_pass.keycount if outer_item.0.values_to_pass.keycount > '0' else '1'  }}"
-  when: release_name == "learner" or release_name == "lms" or release_name == "groups" or release_name == "knowledgemw"
-  with_subelements:
-    - "{{adminutil_access_values}}"
-    - role_to_run
-  loop_control:
-    loop_var: outer_item
+#- name: Load role to decrypt private keys, copy to helm chart and encrypt private keys
+#  include_role:
+#    name: mount-keys
+#    tasks_from: "{{outer_item.1}}"
+#  vars:
+#    private_key_path: "{{ outer_item.0.values_to_pass.basepath }}"
+#    private_key_prefix: "{{ outer_item.0.values_to_pass.keyprefix }}"
+#    private_key_sign_start: "{{ outer_item.0.values_to_pass.keystart }}"
+#    private_key_sign_end: "{{ outer_item.0.values_to_pass.keycount if outer_item.0.values_to_pass.keycount > '0' else '1'  }}"
+#  when: release_name == "learner" or release_name == "lms" or release_name == "groups" or release_name == "knowledgemw"
+#  with_subelements:
+#    - "{{adminutil_access_values}}"
+#    - role_to_run
+#  loop_control:
+#    loop_var: outer_item
 
 - name: Create the token pubic key file
   copy:
